@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Self-Introduction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            overflow-y: scroll;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            margin: 50px auto;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .profile-photo {
+            border-radius: 20px;
+            width: 200px;
+            height: 200px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            background-color: #f4f4f4;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        ul li:hover {
+            background-color: #e0e0e0;
+            transform: scale(1.05);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .toggle-list {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+
+        /* Scroll cycle effect for traveling */
+        .travel-container {
+            height: 50px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            display: none; /* Hidden by default */
+            margin-top: 10px;
+        }
+
+        .travel-list {
+            position: absolute;
+            animation: scrollUp 8s linear infinite;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+        }
+
+        .travel-list li {
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Smooth continuous upward scroll */
+        @keyframes scrollUp {
+            0% {
+                top: 0;
+            }
+            25% {
+                top: -50px;
+            }
+            50% {
+                top: -100px;
+            }
+            75% {
+                top: -150px;
+            }
+            100% {
+                top: 0;
+            }
+        }
+
+        /* Zzz animation container */
+        .zzz-container {
+            display: inline-block;
+            overflow: hidden;
+            width: 80px; /* Keep it closer */
+            height: 30px; /* Adjust height for visibility */
+            vertical-align: middle;
+            position: relative;
+        }
+
+        /* The animated zzz */
+        .zzz {
+            display: inline-block;
+            position: absolute;
+            white-space: nowrap;
+            animation: scrollZzz 4s linear infinite;
+        }
+
+        /* Keyframes for zzz movement */
+        @keyframes scrollZzz {
+            0% {
+                transform: translateX(-30%);
+            }
+            100% {
+                transform: translateX(120%);
+            }
+        }
+
+        /* Style for the comment section */
+        .food-comment {
+            position: relative;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 15px 20px;
+            max-width: 80%;
+            margin: 20px auto;
+            text-align: center;
+            font-size: 18px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            font-style: italic;
+        }
+
+        .food-comment:before {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            border-width: 10px;
+            border-style: solid;
+            border-color: #f9f9f9 transparent transparent transparent;
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Viktors Vinogradovs</h1>
+
+    <!-- Profile photo -->
+    <img class="profile-photo" src="profile-photo.jpg" alt="Viktors Vinogradovs Photo">
+
+    <h2>Hobbies <span class="kaomoji">(*＾▽＾)／</span></h2>
+    <ul>
+        <li onclick="toggleGames()">Games <span class="kaomoji">(¬‿¬)</span></li>
+        <ul id="gamesList" class="hidden toggle-list">
+            <li>The Walking Dead: The Game</li>
+            <li>Cyberpunk 2077</li>
+            <li>Crusader Kings 3</li>
+        </ul>
+
+        <li onclick="toggleMovies()">Movies <span class="kaomoji">(＾▽＾)</span></li>
+        <ul id="moviesList" class="hidden toggle-list">
+            <li>Game of Thrones</li>
+            <li>How to train your dragon</li>
+            <li>Treasure Planet</li>
+        </ul>
+
+        <li onclick="toggleTravel()">Traveling <span class="kaomoji">(◕‿◕)</span></li>
+        <div id="travelContainer" class="travel-container">
+            <ul class="travel-list">
+                <li>Home</li>
+                <li>University</li>
+                <li>Work</li>
+                <li>Gym</li>
+            </ul>
+        </div>
+    </ul>
+
+    <h2>Favorite Food <span class="kaomoji">(^～^)</span></h2>
+    <div class="food-comment">
+        <p>As long as it sustains my existence, it's good enough.</p>
+    </div>
+
+    <h2>Skills <span class="kaomoji">(¬‿¬)</span></h2>
+    <ul>
+        <li>Sleeping (advanced)
+            <span class="kaomoji">(￣o￣)</span>
+            <span class="zzz-container">
+                <span class="zzz">zz ZZ zz ZZ</span>
+            </span>
+        </li>
+        <li>Eating (advanced) <span class="kaomoji">(^_^)</span></li>
+        <li>Drinking (novice) <span class="kaomoji">(⊙_⊙;)</span></li>
+    </ul>
+</div>
+
+<script>
+    function toggleGames() {
+        const gamesList = document.getElementById('gamesList');
+        gamesList.classList.toggle('hidden');
+    }
+
+    function toggleMovies() {
+        const moviesList = document.getElementById('moviesList');
+        moviesList.classList.toggle('hidden');
+    }
+
+    function toggleTravel() {
+        const travelContainer = document.getElementById('travelContainer');
+        if (travelContainer.style.display === 'none' || travelContainer.style.display === '') {
+            travelContainer.style.display = 'block';
+        } else {
+            travelContainer.style.display = 'none';
+        }
+    }
+</script>
+
+</body>
+</html>
